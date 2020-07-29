@@ -12,7 +12,10 @@ function CreateExercise() {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    axios.get("http://localhost:3000/users").then((res) => setUsers(res.data));
+    axios.get("http://localhost:3000/users").then((res) => {
+      setUsers(res.data);
+      setUserId(res.data[0]._id);
+    });
   }, []);
 
   const onSelect = (e) => {
