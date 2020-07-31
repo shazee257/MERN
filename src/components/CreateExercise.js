@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 
-function CreateExercise() {
+const CreateExercise = () => {
   const [users, setUsers] = useState([]);
   const [userId, setUserId] = useState("");
   const [username, setUsername] = useState("");
@@ -12,7 +12,10 @@ function CreateExercise() {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    axios.get("http://localhost:3000/users").then((res) => setUsers(res.data));
+    axios.get("http://localhost:3000/users").then((res) => {
+      setUsers(res.data);
+      setUserId(res.data[0]._id);
+    });
   }, []);
 
   const onSelect = (e) => {
@@ -42,8 +45,7 @@ function CreateExercise() {
     axios
       .post("http://localhost:3000/exercises/add", exercise)
       .then((res) => console.log(res.data));
-
-    // window.location = "/";
+    window.location = "/";
   };
 
   return (
@@ -102,6 +104,6 @@ function CreateExercise() {
       </form>
     </div>
   );
-}
+};
 
 export default CreateExercise;

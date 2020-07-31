@@ -8,7 +8,6 @@ const ExerciseSchema = mongoose.Schema(
     },
     description: {
       type: String,
-      unique: true,
       required: true,
     },
     duration: {

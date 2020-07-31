@@ -4,7 +4,7 @@ const Exercise = require("../models/Exercise");
 
 // @route   GET /exercises
 router.get("/", async (req, res) => {
-  await Exercise.find()
+  await Exercise.find({})
     .populate("user")
     .then((exercises) => res.json(exercises))
     .catch((err) => res.status(400).json("Error: " + err));
@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 // @route   POST /exercises/add
 router.post("/add", async (req, res) => {
   const newExercise = await new Exercise({
-    user: req.body.userId,
+    user: req.body.user,
     description: req.body.description,
     duration: Number(req.body.duration),
     date: Date.parse(req.body.date),
@@ -42,7 +42,7 @@ router.delete("/:id", async (req, res) => {
 // @route   Update /exercises/:id
 router.put("/:id", async (req, res) => {
   await Exercise.findByIdAndUpdate(req.params.id, {
-    user: req.body.userId,
+    user: req.body.user,
     description: req.body.description,
     duration: Number(req.body.duration),
     date: Date.parse(req.body.date),
