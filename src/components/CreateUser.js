@@ -15,11 +15,9 @@ function CreateUser() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-
     const user = {
       userName: username,
-      rollNumber: Number(rollnumber),
+      rollNumber: rollnumber,
     };
 
     console.log(user);
@@ -27,6 +25,8 @@ function CreateUser() {
     axios
       .post("http://localhost:3000/users/add", user)
       .then((res) => console.log(res.data));
+
+    alert("User created successfully..");
   };
 
   return (

@@ -15,12 +15,11 @@ const EditExercise = (props) => {
     axios
       .get("http://localhost:3000/exercises/" + props.match.params.id)
       .then((res) => {
-        console.log(res.data);
         setUserId(res.data.user._id);
         setUsername(res.data.user.userName);
         setDescription(res.data.description);
         setDuration(res.data.duration);
-        //setDate(res.data.date);
+        setDate(Date.parse(res.data.date));
       });
 
     axios.get("http://localhost:3000/users").then((res) => setUsers(res.data));
@@ -50,12 +49,10 @@ const EditExercise = (props) => {
     const exercise = { user: userId, description, duration, date };
     console.log(exercise);
 
-    // TO WORK
-
-    // axios
-    //   .post("http://localhost:3000/exercises/add", exercise)
-    //   .then((res) => console.log(res.data));
-    //window.location = "/";
+    axios
+      .put("http://localhost:3000/exercises/" + props.match.params.id, exercise)
+      .then((res) => console.log(res.data));
+    window.location = "/";
   };
 
   return (
@@ -64,7 +61,12 @@ const EditExercise = (props) => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Username: </label>
-          <select required className="form-control" onChange={onSelect}>
+          <select
+            required
+            className="form-control"
+            value={username}
+            onChange={onSelect}
+          >
             {users.map((user) => {
               return (
                 <option
@@ -103,7 +105,6 @@ const EditExercise = (props) => {
             <DatePicker selected={date} onChange={onChangeDate} />
           </div>
         </div>
-
         <div className="form-group">
           <input
             type="submit"
