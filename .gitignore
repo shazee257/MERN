@@ -1,6 +1,6 @@
 #configuration files
 /backend/config/config.env
-\backend\config\config.env
+
 # dependencies
 /node_modules
 backend/node_modules
