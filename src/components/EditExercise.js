@@ -13,7 +13,7 @@ const EditExercise = (props) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/exercises/" + props.match.params.id)
+      .get(`${process.env.REACT_APP_BASE_URL}/exercises/` + props.match.params.id)
       .then((res) => {
         setUserId(res.data.user._id);
         setUsername(res.data.user.userName);
@@ -22,7 +22,7 @@ const EditExercise = (props) => {
         setDate(Date.parse(res.data.date));
       });
 
-    axios.get("http://localhost:3000/users").then((res) => setUsers(res.data));
+    axios.get(`${process.env.REACT_APP_BASE_URL}/users`).then((res) => setUsers(res.data));
   }, []);
 
   const onSelect = (e) => {

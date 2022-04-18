@@ -20,10 +20,8 @@ function CreateUser() {
       rollNumber: rollnumber,
     };
 
-    console.log(user);
-
     axios
-      .post("http://localhost:3000/users/add", user)
+      .post(`${process.env.REACT_APP_BASE_URL}/users/add`, user)
       .then((res) => console.log(res.data));
 
     alert("User created successfully..");

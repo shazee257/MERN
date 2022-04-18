@@ -12,10 +12,11 @@ const CreateExercise = () => {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    axios.get("http://localhost:3000/users").then((res) => {
-      setUsers(res.data);
-      setUserId(res.data[0]._id);
-    });
+    axios.get(`${process.env.REACT_APP_BASE_URL}/users`)
+      .then((res) => {
+        setUsers(res.data);
+        setUserId(res.data[0]._id);
+      });
   }, []);
 
   const onSelect = (e) => {
@@ -43,7 +44,7 @@ const CreateExercise = () => {
     console.log(exercise);
 
     axios
-      .post("http://localhost:3000/exercises/add", exercise)
+      .post(`${process.env.REACT_APP_BASE_URL}/exercises/add`, exercise)
       .then((res) => console.log(res.data));
     window.location = "/";
   };
